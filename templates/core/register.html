@@ -1,9 +1,4 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block title %}Register - Global Coaches Academy{% endblock %}
-
-{% block extra_css %}
+{% extends 'base.html' %} {% load static %} {% block title %}Register - Global Coaches Academy{% endblock %} {% block extra_css %}
 <style>
     .auth-container {
         min-height: 100vh;
@@ -59,9 +54,7 @@
         color: var(--text-light);
     }
 </style>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <div class="auth-container">
     <div class="container">
         <div class="auth-card">
@@ -76,44 +69,57 @@
                 <div class="col-lg-6">
                     <div class="auth-body">
                         <h3 class="text-gradient mb-4">Create Account</h3>
-                        
+
                         <form method="post">
-                            {% csrf_token %}
-                            
-                            {% if form.errors %}
-                                <div class="alert alert-danger">
-                                    {% for field, errors in form.errors.items %}
-                                        {% for error in errors %}
-                                            <div>{{ error }}</div>
-                                        {% endfor %}
-                                    {% endfor %}
-                                </div>
+                            {% csrf_token %} {% if form.errors %}
+                            <div class="alert alert-danger">
+                                {% for field, errors in form.errors.items %} {% for error in errors %}
+                                <div>{{ error }}</div>
+                                {% endfor %} {% endfor %}
+                            </div>
                             {% endif %}
-                            
+
                             <div class="mb-3">
-                                <label for="id_username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="id_username" name="username" required>
-                                <div class="form-text">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</div>
+                                <label for="{{ form.first_name.id_for_label }}" class="form-label">First Name</label> {{ form.first_name }}
                             </div>
-                            
+
                             <div class="mb-3">
-                                <label for="id_password1" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="id_password1" name="password1" required>
+                                <label for="{{ form.last_name.id_for_label }}" class="form-label">Last Name</label> {{ form.last_name }}
                             </div>
-                            
+
+                            <div class="mb-3">
+                                <label for="{{ form.email.id_for_label }}" class="form-label">Email</label> {{ form.email }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="{{ form.country.id_for_label }}" class="form-label">Country</label> {{ form.country }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="{{ form.town.id_for_label }}" class="form-label">Town/City</label> {{ form.town }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="{{ form.institution.id_for_label }}" class="form-label">Institution/Organization</label> {{ form.institution }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="{{ form.password1.id_for_label }}" class="form-label">Password</label> {{ form.password1 }}
+                            </div>
+
                             <div class="mb-4">
-                                <label for="id_password2" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" id="id_password2" name="password2" required>
+                                <label for="{{ form.password2.id_for_label }}" class="form-label">Confirm
+                                    Password</label> {{ form.password2 }}
                                 <div class="form-text">Enter the same password as before, for verification.</div>
                             </div>
-                            
+
                             <button type="submit" class="btn btn-primary btn-auth">
                                 <i class="fas fa-user-plus me-2"></i>Create Account
                             </button>
                         </form>
-                        
+
                         <div class="text-center mt-4">
-                            <p class="text-muted">Already have an account? 
+                            <p class="text-muted">Already have an account?
                                 <a href="{% url 'core:login' %}" class="text-decoration-none">Sign in here</a>
                             </p>
                         </div>
@@ -124,4 +130,3 @@
     </div>
 </div>
 {% endblock %}
-
